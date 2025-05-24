@@ -168,17 +168,17 @@ void PeerDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
 {
     KTreeviewItemDelegate::paint(painter, option, index);
     painter->save();
-    QStyleOptionViewItem viewOption(option);
-    initStyleOption(&viewOption, index);
-    if (option.state.testFlag(QStyle::State_HasFocus))
-        viewOption.state = viewOption.state ^ QStyle::State_HasFocus;
+//    QStyleOptionViewItem viewOption(option);
+//    initStyleOption(&viewOption, index);
+//    if (option.state.testFlag(QStyle::State_HasFocus))
+//        viewOption.state = viewOption.state ^ QStyle::State_HasFocus;
 
-    QStyledItemDelegate::paint(painter, viewOption, index);
+//    QStyledItemDelegate::paint(painter, viewOption, index);
     if(index.column()==static_cast<int>(PeerModel::Columns::PROGRESS))
     {
         const int clusters = qMin(index.model()->data(index, PiecesNumRole).toInt(), PeerModel::ProgressCluster);
         const PeerModel::PeerInfo *peer = (const PeerModel::PeerInfo *)index.data().value<void *>();
-        QRect bRect = viewOption.rect;
+        QRect bRect = option.rect;
         bRect.adjust(1, 1, -1, -1);
         painter->setPen(borderColor);
         painter->setBrush(QBrush(backgroundcolor));
